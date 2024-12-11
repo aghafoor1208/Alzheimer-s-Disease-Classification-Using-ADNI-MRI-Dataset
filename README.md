@@ -90,7 +90,12 @@ Defines a simple 2D CNN architecture with:
 2. Install dependencies:
 
    ```bash
-   pip install -r requirements.txt
+pip install numpy
+pip install Pillow
+pip install matplotlib
+pip install torch
+pip install torchvision
+
    ```
 
 ---
