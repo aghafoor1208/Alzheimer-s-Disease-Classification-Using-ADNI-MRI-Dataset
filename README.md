@@ -2,6 +2,9 @@
 
 This repository contains a project for classifying MRI scans using a convolutional neural network (CNN). The model classifies MRI slices into three categories: Cognitive Normal (CN), Alzheimer's Disease (AD), and Mild Cognitive Impairment (MCI).
 
+![Middle Slice Extraction: Central axial slice of 3D MRI, sample images](MRI_selected_middle_samples.jpg)
+
+
 ## Project Overview
 
 This project uses the ADNI dataset to train a CNN on middle slices of 3D MRI images. The approach simplifies working with MRI data by focusing on 2D slices, allowing for efficient training and evaluation. The dataset is preprocessed, split into training, validation, and test sets, and used to train a CNN for classification.
