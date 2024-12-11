@@ -1,37 +1,46 @@
+# README: Alzheimer's Disease Classification using ADNI MRI Dataset
 
-
-# Alzheimer's Disease Classification Using ADNI MRI Dataset
-
-This repository focuses on the classification of Alzheimer's Disease, Mild Cognitive Impairment (MCI), and Cognitive Normal (CN) conditions using MRI scans from the ADNI dataset. The project uses a convolutional neural network (CNN) to classify MRI slices effectively.
+This repository contains a project for classifying MRI scans using a convolutional neural network (CNN). The model classifies MRI slices into three categories: Cognitive Normal (CN), Alzheimer's Disease (AD), and Mild Cognitive Impairment (MCI).
 
 ## Project Overview
 
-The repository presents a pipeline that:
-1. Preprocesses 3D MRI images by extracting the middle slice.
-2. Normalizes and scales the extracted slices.
-3. Trains a SimpleCNN model on the processed data.
-4. Evaluates the model on unseen data.
+This project uses the ADNI dataset to train a CNN on middle slices of 3D MRI images. The approach simplifies working with MRI data by focusing on 2D slices, allowing for efficient training and evaluation. The dataset is preprocessed, split into training, validation, and test sets, and used to train a CNN for classification.
+
+---
 
 ## Dataset Preparation
 
+### About the ADNI Dataset
+
+The **Alzheimer's Disease Neuroimaging Initiative (ADNI)** dataset is a publicly available dataset designed to support research on the early detection and monitoring of Alzheimer's Disease. The dataset includes a wide variety of imaging modalities, clinical data, and biomarker information.
+
+**Access Information**:
+
+1. Visit the official [ADNI website](http://adni.loni.usc.edu/).
+2. Create an account and agree to the data use agreement.
+3. Request access to the MRI dataset.
+
+Once approved, download the `.nii` files corresponding to T1-weighted MRI scans. These scans should be organized and labeled for classification.
+
 ### Input Data Format
 
-Organize your `.nii` files in a folder named `nii_files`, following this naming convention:
+Ensure the dataset folder contains `.nii` files, where each file represents an MRI scan and follows the naming convention:
 
 ```
 <patient_id>_<class_label>.nii
 ```
 
 Where `<class_label>` is:
+
 - `CN` for Cognitive Normal
 - `AD` for Alzheimer's Disease
 - `MCI` for Mild Cognitive Impairment
 
-### Preprocessing Workflow
+### Preprocessing Steps
 
-1. **Normalization**: Scale the MRI data to `[0, 1]`.
-2. **Middle Slice Extraction**: Extract the central slice of the MRI scan along the axial plane.
-3. **Scaling**: Convert the slice to a grayscale image and rescale it to 0–255.
+1. **Normalization**: MRI data is scaled to the range `[0, 1]` for consistency.
+2. **Middle Slice Extraction**: The central axial slice of each 3D MRI is extracted for analysis.
+3. **Scaling**: Extracted slices are converted to grayscale images and rescaled to a range of `[0, 255]`.
 
 ### Example Dataset Structure
 
@@ -43,53 +52,71 @@ nii_files/
     ...
 ```
 
+---
+
 ## Code Structure
 
-### Key Functions and Classes
+### `load_mri_data(nii_folder)`
 
-- **`load_mri_data(nii_folder)`**  
-  Preprocesses `.nii` files and maps class labels to numeric values.
-  
-- **`MRIDataset`**  
-  A custom PyTorch Dataset class to handle MRI data with transformations (resizing, normalization, tensor conversion).
+Loads and preprocesses MRI scans, including middle slice extraction and label mapping.
 
-- **`SimpleCNN`**  
-  A simple convolutional neural network architecture for classification.
+### `MRIDataset` Class
 
-### Model Architecture
-- **Convolutional Layers**: 2 layers with ReLU activation and max pooling.
-- **Fully Connected Layers**: 2 layers for classification into CN, AD, and MCI.
+A custom PyTorch Dataset for handling MRI data and applying transformations such as resizing, normalization, and tensor conversion.
+
+### `SimpleCNN` Class
+
+Defines a simple 2D CNN architecture with:
+
+- Two convolutional layers with ReLU activation and max pooling.
+- Fully connected layers for classifying images into three categories.
+
+### Training and Evaluation
+
+- Training uses cross-entropy loss and the Adam optimizer.
+- The dataset is split into training, validation, and test sets (70%, 15%, 15%).
+- Metrics include training/validation loss and accuracy.
+
+---
 
 ## Installation
 
 1. Clone the repository:
+
    ```bash
-   git clone https://github.com/yourusername/ADNI-MRI-Classification.git
-   cd ADNI-MRI-Classification
+   git clone https://github.com/aghafoor1208/Alzheimer-s-Disease-Classification-Using-ADNI-MRI-Dataset.git
    ```
 
-2. Install required packages:
+2. Install dependencies:
+
    ```bash
    pip install -r requirements.txt
    ```
 
+---
+
 ## How to Run
 
 1. Place `.nii` files in the `nii_files` folder.
-2. Run the training script:
+2. Run the main script:
    ```bash
-   python AD_classfication.py
+   python AD_classification.py
    ```
-3. Monitor the training and validation metrics in the terminal.
+3. View training and evaluation results in the terminal.
+
+---
 
 ## Results
 
-After training, the test accuracy is displayed. Example metrics logged during training include loss and accuracy for both training and validation datasets.
+The model outputs training and validation metrics during each epoch, and final test accuracy is printed after training.
 
-### Visualization Example
+---
+
+## Example Usage
+
+To visualize preprocessing:
 
 ```python
-# Visualize Preprocessed Slices
 plt.figure(figsize=(12, 6))
 for i in range(5):
     plt.subplot(1, 5, i + 1)
@@ -99,12 +126,21 @@ for i in range(5):
 plt.show()
 ```
 
+---
+
 ## Future Work
 
-- Implement 3D CNNs (`nn.Conv3d`) for full volumetric analysis.
-- Explore advanced architectures like ResNet and EfficientNet.
-- Use data augmentation to improve model generalization.
+- Upgrade to 3D CNNs for full-volume MRI analysis.
+- Experiment with advanced architectures like ResNet or EfficientNet.
+- Incorporate data augmentation for improved generalization.
 
+---
+
+## License
+
+This project is licensed under the MIT License.
+
+---
 
 ## Contact
 
