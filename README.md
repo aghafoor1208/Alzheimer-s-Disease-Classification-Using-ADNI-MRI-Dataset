@@ -1,6 +1,6 @@
 # README: Alzheimer's Disease Classification using ADNI MRI Dataset
 
-This repository contains a project for classifying MRI scans using a convolutional neural network (CNN). The model classifies MRI slices into three categories: Cognitive Normal (CN), Alzheimer's Disease (AD), and Mild Cognitive Impairment (MCI).
+This repository contains a project for classifying MRI scans using a convolutional neural network (CNN). The model classifies MRI slices into three categories: Cognitive Normal (CN ,  Label 0), Alzheimer's Disease (AD, Label 1), and Mild Cognitive Impairment (MCI,  Label 2).
 
 ![Middle Slice Extraction: Central axial slice of 3D MRI, sample images](MRI_selected_middle_samples.jpg)
 
